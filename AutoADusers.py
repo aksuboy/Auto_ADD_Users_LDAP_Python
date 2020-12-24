@@ -12,7 +12,7 @@ nb_users = 0
 
 
 # On demande ou est le fichier?
-print("Entrez la direction du fichier contenant la liste des utilisateurs à ajouter : ")
+print("Entrez le chemin du fichier contenant la liste des utilisateurs à ajouter : ")
 listing = input(">>> ")
 
 #on verifie que le fichier existe
