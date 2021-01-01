@@ -12,7 +12,7 @@ nb_users = 0
 
 
 # On demande ou est le fichier?
-print("Entrez le chemin du fichier contenant la liste des utilisateurs à ajouter : ")
+print("Entrez la direction du fichier contenant la liste des utilisateurs à ajouter : ")
 listing = input(">>> ")
 
 #on verifie que le fichier existe
@@ -23,32 +23,56 @@ if if_exist and if_file is True :
 else :
     print("Fichier non trouvé : le programme va quiter...")
     sys.exit()
-#On enregistre les données du fichier et le une variable
-listing_lu = open(listing, "r")
-listing_ok = listing_lu.read()
-listing_lu = open(listing, "r")
-nb_lignes = len(listing_lu.readlines())
-print("génération de la liste des comptes à créer : \n_______________\n"+listing_ok+"\n_______________")
-listing_lu.close()
+
+
 
 #Création de la fonction ajoutAD
 def ajoutAD():
     # On verifie si le compte existe
     utilisateur = "dsquery user "+DC+" -name {}"
-    ajoutAD = utilisateur.format(line.strip())
+    ajoutAD = utilisateur.format(value[0]+value[1])
     ajoutCMD = os.popen(ajoutAD).read()
     if ajoutCMD: #si le compte existe déjà
-        check = "{} existe déjà".format(line.strip())
+        check = "{} éxiste déjà".format(value[0]+value[1])
         print(check)
-        
+        sys.exit()
     if not ajoutCMD:#si le compte n'éxiste pas on doit le créé
-        ajoutAD = 'dsadd user "Cn={},{}" -disabled yes'
-        ajout_synthaxe = ajoutAD.format(line.strip(), DC.strip())
+        ajoutAD = 'dsadd user "Cn={},ou={},{}" -pwd Openclass57 -mustchpwd yes '
+        ajout_synthaxe = ajoutAD.format(value[0]+value[1],value[2],DC)
         os.system(ajout_synthaxe)
         
-
+"""
+print("création des comptes utilisateurs suivants : \n"+ listing_ok)
 with open(listing) as l_u:
     for i in range(nb_lignes):
         line = l_u.readline()
         ajoutAD()
-        
+        print ("compte",line,"créé")
+"""
+#On enregistre les données du fichier et le une variable
+listing_lu = open(listing, "r")
+
+# Lit la première ligne du fichier (entête de colonnes)
+# pour avancer jusqu'à la ligne 2
+listing_lu.readline()
+
+while True:
+    #Lecture d'une nouvelle ligne dans le fichier
+    line = listing_lu.readline()
+    
+    # Si la ligne est vide, ma fin du fichier a été atteinte
+    if line == "":
+        break
+
+    # Extraction des cellules de la ligne courante
+    value = line.split(";")
+  
+    print("création du compte : ", value[0]+value[1])
+    ajoutAD()
+    #print(value[2])
+"""
+nb_lignes = len(listing_lu.readlines())
+#print("compte(s) à créer :\n", value)
+print("nombre de compte à créer :", nb_lignes)
+listing_lu.close()
+"""
