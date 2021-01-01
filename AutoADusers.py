@@ -35,7 +35,7 @@ def ajoutAD():
     if ajoutCMD: #si le compte existe déjà
         check = "{} éxiste déjà".format(value[0]+value[1])
         print(check)
-        sys.exit()
+        
     if not ajoutCMD:#si le compte n'éxiste pas on doit le créé
         ajoutAD = 'dsadd user "Cn={},ou={},{}" -pwd Openclass57 -mustchpwd yes '
         ajout_synthaxe = ajoutAD.format(value[0]+value[1],value[2],DC)
