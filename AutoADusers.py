@@ -30,15 +30,15 @@ else :
 def ajoutAD():
     # On verifie si le compte existe
     utilisateur = "dsquery user "+DC+" -name {}"
-    ajoutAD = utilisateur.format(value[0]+value[1])
+    ajoutAD = utilisateur.format(value[1][:1]+value[0])
     ajoutCMD = os.popen(ajoutAD).read()
     if ajoutCMD: #si le compte existe déjà
-        check = "{} éxiste déjà".format(value[0]+value[1])
+        check = "{} éxiste déjà".format(value[1][:1]+value[0])
         print(check)
         
     if not ajoutCMD:#si le compte n'éxiste pas on doit le créé
         ajoutAD = 'dsadd user "Cn={},ou={},{}" -pwd Openclass57 -mustchpwd yes '
-        ajout_synthaxe = ajoutAD.format(value[0]+value[1],value[2],DC)
+        ajout_synthaxe = ajoutAD.format(value[1][:1]+value[0],value[2],DC)
         os.system(ajout_synthaxe)
         
 """
@@ -67,7 +67,7 @@ while True:
     # Extraction des cellules de la ligne courante
     value = line.split(";")
   
-    print("création du compte : ", value[0]+value[1])
+    print("création du compte : ", value[1][:1]+value[0])
     ajoutAD()
     #print(value[2])
 """
