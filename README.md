@@ -22,5 +22,5 @@ Auteur : CIFTCI Veli
 Versions 1.0
 
 
-License
-Ce projet est sous licence opensource voir le fichier LICENSE.md pour plus d'informations
+License Opensource
+Ce script rédigé en python par l'auteur est mis à contribution de la communauté gratuitement. Vous avez accès également accès au script pour le modifier.
