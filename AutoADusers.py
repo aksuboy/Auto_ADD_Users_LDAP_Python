@@ -5,7 +5,8 @@ import os
 import sys
 
 
-
+# On définit une variable nb_users pour le nombre de comptes qui seront créés
+nb_users = 0
 # On demande le nom de domaine, on formatera l'entrée en dc=xxx,dc=xxx'
 print("Entrez le nom de domaine")
 nom_de_domaine = input(">>>")
@@ -33,11 +34,11 @@ while reponse == False:
         reponse = False
 
 
-# On définit une variable nb_users pour le nombre de comptes qui seront créés
 
-nb_users = 0
+
 #Création de la fonction ajoutAD
 def ajoutAD():
+   
     # On verifie si le compte existe
     utilisateur = "dsquery user "+DC+" -name {}"
     ajoutAD = utilisateur.format(value[1][:1]+value[0].lower())
@@ -47,11 +48,11 @@ def ajoutAD():
         print(check)
         
     if not ajoutCMD:#si le compte n'éxiste pas on doit le créé
-        nb_users += 1 #on ajoute 1 au nombre d'utilisateurs créés
         ajoutAD = 'dsadd user "Cn={},ou={},{}" -mustchpwd yes -fn {} -ln {} -tel {} -pwd {}'
         ajout_synthaxe = ajoutAD.format(value[1][:1]+value[0].lower(),value[2],DC,value[1],value[0],value[3],value[4].strip())
         os.system(ajout_synthaxe)
-        
+        global nb_users
+        nb_users += 1 #on ajoute 1 au nombre d'utilisateurs créés
         
 
 #On enregistre les données du fichier et le une variable
@@ -75,7 +76,7 @@ while True:
     print("création du compte de ", value[1],value[0])
     ajoutAD()
     
-    #print(value[2])
+    
 
 print("nombre de compte à créer :", nb_users)
 listing_lu.close()
