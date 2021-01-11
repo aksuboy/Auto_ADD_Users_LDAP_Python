@@ -2,7 +2,7 @@
 
 # Import du ou des modules nécessaire
 import os
-import sys
+#import sys
 
 
 # On définit une variable nb_users pour le nombre de comptes qui seront créés
@@ -78,5 +78,5 @@ while True:
     
     
 
-print("nombre de compte à créer :", nb_users)
+print("nombre de comptes créés :", nb_users)
 listing_lu.close()
