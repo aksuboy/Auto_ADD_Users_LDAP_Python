@@ -2,7 +2,7 @@
 
 # Import du ou des modules nécessaire
 import os
-#import sys
+
 
 
 # On définit une variable nb_users pour le nombre de comptes qui seront créés
